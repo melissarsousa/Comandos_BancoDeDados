@@ -1,0 +1,34 @@
+Comandos MongoDB (Versão 6.0.6 - Ubuntu 22.04) 
+
+sudo systemctl start mongod // Iniciar o mongoDB
+
+mongosh // Abrir o mongoshell
+
+use qacoders // Usar a base de dados "qacoders"
+
+show dbs // Mostrar as bases de dados existentes
+
+db.dropDatabase() // Apagar o banco de dados; entrar nela para poder apagar (use -> drop)
+
+db.createCollection() // Criar uma collection vazia
+
+db.mycollection.insertOne({chave1: valor1, chave2: valor2}); // Cria uma collection inserindo dados; se existir a collection, irá somente inserir os documentos | Era db.collectionName.save() na versão anterior | Existe insertOne e insertMany.
+
+
+db.getCollectionNames() // Lista as collections do banco de dados
+
+db.collectionName.drop() // Apaga a collection
+
+db.collectionName.find() // Lista os registros da Collection
+	db.collectionName.findOne({chave:valor}) // 	Mostra o primeiro registro com o valor indicado no comando
+	db.collectionName.find().pretty // Lista os registros da Collection indentados e organizados
+	
+db.collectionName.updateOne({chave:valor},{$set:{chave:valor}}) // primeiro: parâmetro para achar o dado (pode ser colocada mais de uma chave); $set: qual valor será alterado, se o valor a ser alterado estiver em uma lista, colocar como $set: {chave.$:valor}, ou {chave.posiçãodentrodalista:valor}. | Era .update() na versão anterior, e o multi: true é correspondente a .updateMany() e o multi:false a .updateOne()
+
+db.collectionName.deleteOne({chave:valor}) // Era .remove() na versão anterior | Existe deleteOne (o primeiro registro achado), deleteMany (todos os registros que se encaixem no filtro de remoçao), findOneAndDelete (apaga o primeiro registro e mostra qual registro foi apagado)
+
+Consulta de dados com operadores lógicos:
+	db.collectionName.find({chave:{$operador: valor}})
+		operadores: $eq (equal), $gt (greater than), $gte (greater than or equal), $lt (less than), $lte (less than or equal), $ne (not equal)
+		para operador $or: db.collectionName.find({$or[{chave:valor},{chave:valor}]})
+
